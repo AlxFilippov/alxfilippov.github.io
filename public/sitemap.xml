@@ -9,13 +9,13 @@
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>//localhost:1313/posts/</loc>
+    <loc>//localhost:1313/posts/second-post/</loc>
     <lastmod>2026-01-07T07:07:07+01:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>//localhost:1313/posts/second-post/</loc>
+    <loc>//localhost:1313/posts/</loc>
     <lastmod>2026-01-07T07:07:07+01:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
