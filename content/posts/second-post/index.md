@@ -1,54 +1,60 @@
 +++
-title = 'Start with Frame Timeline'
+title = 'Frame Timeline: Your Entry Point'
 date = 2026-01-07T07:07:07+01:00
 draft = true
 +++
-# Frame Timeline как входная точка в анализе производительности
 
-**Цель статьи : Дать общую картину влияния различных компонентов в вашем приложении на Frame Timeline(плавность ui)**
+# Frame Timeline: Your Entry Point for Screen Performance Analysis
 
-> Дисклеймер: 
- За начальное значение возьмем, что вы уже базово знакомы с  трейсами и `perfetto-trace` в том числе в `Android`. Если вы не знакомы в конце статьи - статьи, с которыми стоит ознакомиться и потом вернуться или не вернуться - Управляйте своей жизнью сами !
+**Goal of this article:** To provide a high-level overview of how various components in your app impact UI smoothness.
 
-## Знакомство 
+> **Disclaimer:** > This post assumes you already have a basic understanding of traces and `perfetto-trace` in the context of Android. If not, here are some resources to check out before diving in (or don't, and just keep reading—you’re the master of your own life!):
+> * [Tracing 101](https://perfetto.dev/docs/getting-started/start-using-perfetto) – The basics: what tracing is and why it matters.
+> * [Record traces on Android](https://developer.android.com/topic/performance/tracing/on-device) – How to capture a trace directly from your device.
+> * [FrameTimeline: Jank detection](https://perfetto.dev/docs/data-sources/frametimeline) – How Perfetto actually detects "jank."
 
-![Photo](frame-timeline.png "Frame Timeline")
+---
 
-`Frame Timeline` это мои читатели. Мои читатели - это `Frame Timeline`, какого то абстрактного приложения с видимыми проблемами c длительностью некоторых кадров.
-### Кратко : 
-- `Expected Timeline` как должно быть - кадры сына маминой подруги
-- `Actual Timeline` это фреймы рассматриваемого абстрактного приложения
+## Introduction 
 
-### TL:DR
-- Зеленый цвет хорошо
-- Красный цвето плохо
+![Photo](frame-timeline.png)
 
-## Что может повлиять на длительность серии кадров или одного?
+`Frame Timeline`, meet my readers. Readers, meet the `Frame Timeline` of an abstract app with some obvious frame duration issues.
 
-Когда задаю себе это вопрос, возникает в голове мем с человеком около доски и нитками на ней (визуализируем).
-Но если серьезно приложу список классов и технологий и он далеко не полный.
+### In short: 
+- **Expected Timeline:** The expected sequence of frames (the "perfect" frames your mother told you about).
+- **Actual Timeline:** The actual sequence of frames from our abstract app.
 
-### Интерактив
+### TL;DR:
+- **Green** = Good.
+- **Red** = Bad.
 
-- Дайте себе время и пробежитесь глазами, знаете ли вы что делает каждый класс или технология по отдельности на картинке ? 
+---
 
-![Classes](classes.jpg "Classes")
+## What affects the duration of a frame (or a series of them)?
 
-### Осознание
+Whenever I ask myself this question, that meme of the guy standing in front of the corkboard with red strings comes to mind (visualize it). But seriously, here is a list of classes and technologies involved—and it's far from exhaustive.
 
->Уверен, многие знают большую часть классов и технологий и это замечательно!
+### Interactive Moment
 
-Но что если я вам скажу, что ВСЕ что на картинке зачастую  используется  **вместе** в одном приложении, может быть даже на одном фиче экране в какой то момент времени.
+Take a second to scan this list: Do you know what each individual class or technology on this image actually does?
 
-`Пример : 
-Биг-тех и там композитный(составной) экран в который интегрированы разные фиче-команды с около одинаковым техническим стэком и разным обьемом технического долга на команду.`
+![Classes](classes.jpg)
 
-#### Вопросы, на которые стоит ответить
+### The Realization
 
-- Как классы и технологии работают вместе?
-- Как они могут повлиять друг на друга?
-- Как они могут повлиять на наше абстрактное приложение в плане утилизации ресурсов?
-- Может кто то из них блокировать `UI` поток ?
-- Сколько ресурсов по отдельности и вместе они потребляют ?
+I’m sure many of you recognize most of these, and that’s great!
 
+But what if I told you that **EVERYTHING** in that image is often used **together** in a single app? Sometimes, they are even active on the same screen at the exact same time.
 
+**Example:** A Big-Tech app with a composite screen where different feature teams are integrated. They share a similar tech stack but have wildly different levels of technical debt.
+
+#### Questions worth answering:
+
+- How do these classes and technologies work together?
+- How do they impact one another?
+- How do they affect our abstract app in terms of resource utilization?
+- Can any of them block the `UI` thread?
+- How many resources do they consume individually vs. combined?
+
+---
