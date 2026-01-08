@@ -3,7 +3,7 @@
 # https://blowfish.page/docs/getting-started/
 
 theme = "blowfish"
-baseURL = "base"
+baseURL = "https://alxfilippov.github.io"
 languageCode = "en"
 title = "PerfDev"
 defaultContentLanguage = "en"
